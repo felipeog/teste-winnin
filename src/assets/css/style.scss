@@ -1,0 +1,158 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+body {
+  margin-top: 160px;
+}
+
+.header {
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.header__title {
+  font-size: 1.6rem;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 1.6rem;
+}
+
+.header__title--accent {
+  color: #ff5500;
+}
+
+.navigation {
+  padding: 1rem;
+  background-color: #fff;
+}
+
+.button {
+  font-size: 1rem;
+  padding: 0.8rem;
+  display: inline-block;
+  background-color: #666;
+  border: none;
+  border-radius: 0.4rem;
+  width: 10rem;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 200ms;
+}
+
+.button--active {
+  background-color: #ff5500;
+}
+
+.navigation__list {
+  display: flex;
+  justify-content: center;
+}
+
+.navigation__button {
+  text-transform: uppercase;
+}
+
+.navigation__item + .navigation__item {
+  margin-left: 0.4rem;
+}
+
+.load-more {
+  margin-top: 1rem;
+  font-weight: bold;
+  width: 100%;
+}
+
+.post-list,
+.error {
+  max-width: calc(880px + 2 * 1rem);
+  margin: 0 auto;
+  padding: 0 1rem 1rem;
+}
+
+.post-item {
+  display: flex;
+  padding: 0.8rem 0;
+}
+
+.post-item__thumb {
+  width: 4rem;
+  height: 4rem;
+  flex-shrink: 0;
+  margin-right: 0.8rem;
+  object-fit: cover;
+}
+
+.post-item__title {
+  font-weight: bold;
+  color: #222;
+}
+
+.post-item__meta {
+  font-size: 0.8rem;
+  margin: 0.4rem 0;
+}
+
+.post-item:hover {
+  background-color: #eee;
+}
+
+.post-item__time {
+  color: #444;
+}
+
+.post-item__user {
+  color: #ff5500;
+}
+
+.post-item__url {
+  font-size: 0.8rem;
+  word-break: break-all;
+  color: #000;
+  text-decoration: underline;
+  text-decoration-color: #444;
+  text-underline-position: under;
+  line-height: 1.4em;
+  // border-bottom: 1px solid #aaa;
+  // padding-bottom: 0.1rem;
+}
+
+.button--disabled {
+  cursor: default;
+  background-color: #888;
+  color: #ddd;
+}
+
+.post-list__end {
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 529px) {
+  .navigation__button {
+    width: 5rem;
+  }
+}
+
+.post-item-wrapper {
+  color: #000;
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #666;
+}
+
+.post-item-wrapper:first-child {
+  border-top: 1px solid #666;
+}
