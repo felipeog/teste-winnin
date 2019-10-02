@@ -4,11 +4,12 @@ import r from "../../config/Snoowrap";
 
 class PostList extends Component {
   state = {
-    board: this.props.subreddit,
-    posts: [],
     after: null,
+    board: this.props.subreddit,
     end: false,
-    error: false
+    error: false,
+    loading: true,
+    posts: []
   };
 
   options = { limit: 10 };
@@ -19,6 +20,8 @@ class PostList extends Component {
 
   loadPosts = async () => {
     try {
+      this.setState({ loading: true });
+
       const board = await r.getSubreddit("reactjs");
       let posts,
         after,
@@ -68,7 +71,8 @@ class PostList extends Component {
       this.setState({
         posts: [...this.state.posts, ...posts],
         after,
-        end
+        end,
+        loading: false
       });
     } catch (err) {
       console.error(err);
@@ -78,7 +82,7 @@ class PostList extends Component {
   };
 
   render() {
-    const { posts, end, error } = this.state;
+    const { posts, end, error, loading } = this.state;
 
     return (
       <React.Fragment>
@@ -97,8 +101,10 @@ class PostList extends Component {
 
             <button
               type="button"
-              disabled={end ? "disabled" : ""}
-              className={`button load-more ${end ? "button--disabled" : ""}`}
+              disabled={end || loading ? "disabled" : ""}
+              className={`button load-more ${
+                end || loading ? "button--disabled" : ""
+              }`}
               onClick={this.loadPosts}
             >
               + Ver mais
