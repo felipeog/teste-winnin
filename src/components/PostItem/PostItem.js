@@ -1,6 +1,23 @@
 import React, { Component } from "react";
 
 class PostItem extends Component {
+  formatTime(utc) {
+    const now = new Date();
+    const created = new Date(utc * 1000);
+    const timeDifference = Math.abs(now - created);
+    let formattedTime = "";
+
+    if (timeDifference / (1000 * 60 * 60) < 1) {
+      formattedTime += Math.floor(timeDifference / (1000 * 60)) + " minutos";
+    } else if (Math.floor(timeDifference / (1000 * 60 * 60)) === 1) {
+      formattedTime += "1 hora";
+    } else {
+      formattedTime += Math.floor(timeDifference / (1000 * 60 * 60)) + " horas";
+    }
+
+    return formattedTime;
+  }
+
   formatData = () => {
     const { post } = this.props;
 
@@ -8,19 +25,7 @@ class PostItem extends Component {
     const title = post.title;
     const user = post.author.name;
     const url = "https://www.reddit.com" + post.permalink;
-
-    const now = new Date();
-    const created = new Date(post.created_utc * 1000);
-    const timeDifference = Math.abs(now - created);
-    let time = "";
-
-    if (timeDifference / (1000 * 60 * 60) < 1) {
-      time += Math.floor(timeDifference / (1000 * 60)) + " minutos";
-    } else if (Math.floor(timeDifference / (1000 * 60 * 60)) === 1) {
-      time += "1 hora";
-    } else {
-      time += Math.floor(timeDifference / (1000 * 60 * 60)) + " horas";
-    }
+    const time = this.formatTime(post.created_utc);
 
     return { thumb, title, user, url, time };
   };
