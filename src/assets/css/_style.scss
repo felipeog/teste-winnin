@@ -1,0 +1,204 @@
+/* =============================================================================
+   Inicializações
+============================================================================= */
+
+/* =========================================================
+   Geral
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+body {
+  margin-top: 160px;
+}
+
+/* =========================================================
+   Botão
+========================================================= */
+
+.button {
+  font-size: 1rem;
+  padding: 0.8rem;
+  display: inline-block;
+  background-color: $button-background;
+  border: none;
+  border-radius: 0.4rem;
+  width: 10rem;
+  color: $button-text;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 200ms;
+
+  &--active {
+    background-color: $accent-color;
+  }
+
+  &--disabled {
+    cursor: default;
+    background-color: $button-background-disabled;
+    color: $button-text-disabled;
+  }
+}
+
+/* =============================================================================
+   Estilos
+============================================================================= */
+
+/* =========================================================
+   Header
+========================================================= */
+
+.header {
+  background-color: $header-background;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  &__title {
+    font-size: 1.6rem;
+    color: $header-text;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 1.6rem;
+
+    &--accent {
+      color: $accent-color;
+    }
+  }
+}
+
+/* =========================================================
+   Navigation
+========================================================= */
+
+.navigation {
+  padding: 1rem;
+  background-color: $navigation-background;
+
+  &__list {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__item + &__item {
+    margin-left: 0.4rem;
+  }
+
+  &__button {
+    text-transform: uppercase;
+  }
+}
+
+/* =========================================================
+   Post list
+========================================================= */
+
+.post-list {
+  max-width: calc(880px + 2 * 1rem);
+  margin: 0 auto;
+  padding: 0 1rem 1rem;
+
+  &__end {
+    margin-top: 1rem;
+  }
+}
+
+/* =========================================================
+   Post item
+========================================================= */
+
+.post-item-wrapper {
+  color: $post-item-wrapper-background;
+  text-decoration: none;
+  display: block;
+  border-bottom: $post-item-wrapper-border;
+
+  &:first-child {
+    border-top: $post-item-wrapper-border;
+  }
+}
+
+.post-item {
+  display: flex;
+  padding: 0.8rem 0;
+
+  &:hover {
+    background-color: $post-item-hover-color;
+  }
+
+  &__thumb {
+    width: 4rem;
+    height: 4rem;
+    flex-shrink: 0;
+    margin-right: 0.8rem;
+    object-fit: cover;
+  }
+
+  &__title {
+    font-weight: bold;
+    color: $post-item-title-text;
+  }
+
+  &__meta {
+    font-size: 0.8rem;
+    margin: 0.4rem 0;
+  }
+
+  &__time {
+    color: $post-item-time-text;
+  }
+
+  &__user {
+    color: $post-item-user-text;
+  }
+
+  &__url {
+    font-size: 0.8rem;
+    word-break: break-all;
+    color: $post-item-url-text;
+    text-decoration: underline;
+    text-underline-position: under;
+    line-height: 1.4em;
+  }
+}
+
+/* =========================================================
+   Load more
+========================================================= */
+
+.load-more {
+  margin-top: 1rem;
+  font-weight: bold;
+  width: 100%;
+}
+
+/* =========================================================
+   Error
+========================================================= */
+
+.error {
+  max-width: calc(880px + 2 * 1rem);
+  margin: 0 auto;
+  padding: 0 1rem 1rem;
+}
+
+/* =============================================================================
+   Media queries
+============================================================================= */
+
+@media screen and (max-width: 529px) {
+  .navigation__button {
+    width: 5rem;
+  }
+}
