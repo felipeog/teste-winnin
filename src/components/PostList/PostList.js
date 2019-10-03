@@ -14,7 +14,7 @@ class PostList extends Component {
 
   options = { limit: 10 };
 
-  async componentDidMount() {
+  componentDidMount() {
     this.loadPosts();
   }
 
@@ -97,6 +97,7 @@ class PostList extends Component {
             ) : (
               <p className="post-list__loading">Carregando posts...</p>
             )}
+
             {end ? <p className="post-list__end">Fim do conteúdo</p> : ""}
 
             <button
