@@ -1,10 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { PostList } from 'components'
 
-class NewFeed extends Component {
-  render() {
-    return <PostList subreddit="new" />
-  }
-}
+const NewFeed = () => <PostList subreddit="new" />
 
 export default NewFeed

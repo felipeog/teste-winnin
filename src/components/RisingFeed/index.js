@@ -1,10 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { PostList } from 'components'
 
-class RisingFeed extends Component {
-  render() {
-    return <PostList subreddit="rising" />
-  }
-}
+const RisingFeed = () => <PostList subreddit="rising" />
 
 export default RisingFeed
