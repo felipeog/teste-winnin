@@ -5,11 +5,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom'
-
-import Header from '../Header/Header'
-import HotFeed from '../HotFeed/HotFeed'
-import NewFeed from '../NewFeed/NewFeed'
-import RisingFeed from '../RisingFeed/RisingFeed'
+import { Header, HotFeed, NewFeed, RisingFeed } from 'components'
 
 class App extends Component {
   render() {
@@ -18,7 +14,11 @@ class App extends Component {
         <Header />
 
         <Switch>
-          <Route exact path={['/', '/hot']} component={HotFeed} />
+          <Route exact path="/">
+            <Redirect to="/hot" />
+          </Route>
+
+          <Route path="/hot" component={HotFeed} />
           <Route path="/new" component={NewFeed} />
           <Route path="/rising" component={RisingFeed} />
         </Switch>

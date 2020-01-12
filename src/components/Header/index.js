@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import Navigation from "../Navigation/Navigation";
+import React, { Component } from 'react'
+import { Navigation } from 'components'
 
 class Header extends Component {
   render() {
@@ -11,8 +11,8 @@ class Header extends Component {
 
         <Navigation />
       </header>
-    );
+    )
   }
 }
 
-export default Header;
+export default Header

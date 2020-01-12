@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import PostItem from "../PostItem/PostItem";
-import r from "../../config/Snoowrap";
+import React, { Component } from 'react'
+import { PostItem } from 'components'
+import r from 'config/Snoowrap'
 
 class PostList extends Component {
   state = {
@@ -9,80 +9,80 @@ class PostList extends Component {
     end: false,
     error: false,
     loading: true,
-    posts: []
-  };
+    posts: [],
+  }
 
-  options = { limit: 10 };
+  options = { limit: 10 }
 
   componentDidMount() {
-    this.loadPosts();
+    this.loadPosts()
   }
 
   loadPosts = async () => {
     try {
-      this.setState({ loading: true });
+      this.setState({ loading: true })
 
-      const board = await r.getSubreddit("reactjs");
+      const board = await r.getSubreddit('reactjs')
       let posts,
         after,
-        end = false;
+        end = false
 
       switch (this.props.subreddit) {
-        case "hot":
-          let stickied = 0;
+        case 'hot':
+          let stickied = 0
 
           posts = await board.getHot({
             ...this.options,
-            after: this.state.after
-          });
+            after: this.state.after,
+          })
 
-          posts.forEach(post => {
-            if (post.stickied) stickied++;
-          });
+          posts.forEach((post) => {
+            if (post.stickied) stickied++
+          })
 
-          if (stickied) posts = posts.slice(0, posts.length - stickied);
-          break;
+          if (stickied) posts = posts.slice(0, posts.length - stickied)
+          break
 
-        case "new":
+        case 'new':
           posts = await board.getNew({
             ...this.options,
-            after: this.state.after
-          });
-          break;
+            after: this.state.after,
+          })
+          break
 
-        case "rising":
+        case 'rising':
           posts = await board.getRising({
             ...this.options,
-            after: this.state.after
-          });
-          break;
+            after: this.state.after,
+          })
+          break
 
         default:
-          break;
+          break
       }
 
       if (!posts.length || posts.length < this.options.limit) {
-        after = null;
-        end = true;
+        after = null
+        end = true
       } else {
-        after = posts[posts.length - 1].name;
+        after = posts[posts.length - 1].name
       }
 
       this.setState({
         posts: [...this.state.posts, ...posts],
         after,
         end,
-        loading: false
-      });
+        loading: false,
+      })
     } catch (err) {
-      console.error(err);
+      console.error(err)
 
-      this.setState({ error: true });
+      this.setState({ error: true })
     }
-  };
+  }
 
   render() {
-    const { posts, end, error, loading } = this.state;
+    const { posts, end, error, loading } = this.state
 
     return (
       <React.Fragment>
@@ -93,18 +93,18 @@ class PostList extends Component {
         ) : (
           <section className="post-list">
             {posts.length ? (
-              posts.map(post => <PostItem key={post.id} post={post} />)
+              posts.map((post) => <PostItem key={post.id} post={post} />)
             ) : (
               <p className="post-list__loading">Carregando posts...</p>
             )}
 
-            {end ? <p className="post-list__end">Fim do conteúdo</p> : ""}
+            {end ? <p className="post-list__end">Fim do conteúdo</p> : ''}
 
             <button
               type="button"
-              disabled={end || loading ? "disabled" : ""}
+              disabled={end || loading ? 'disabled' : ''}
               className={`button load-more ${
-                end || loading ? "button--disabled" : ""
+                end || loading ? 'button--disabled' : ''
               }`}
               onClick={this.loadPosts}
             >
@@ -113,8 +113,8 @@ class PostList extends Component {
           </section>
         )}
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default PostList;
+export default PostList
