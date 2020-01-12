@@ -1,4 +1,5 @@
 import React from 'react'
+import './index.scss'
 
 const formatTime = (utc) => {
   const now = new Date()

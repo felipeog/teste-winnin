@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './index.scss'
 import { PostItem } from 'components'
 import r from 'config/Snoowrap'
 

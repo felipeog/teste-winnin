@@ -1,0 +1,11 @@
+@import '../../vars';
+
+.post-list {
+  max-width: calc(880px + 2 * 1rem);
+  margin: 0 auto;
+  padding: 0 1rem 1rem;
+
+  &__end {
+    margin-top: 1rem;
+  }
+}

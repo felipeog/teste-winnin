@@ -1,0 +1,19 @@
+@import '../../vars';
+
+.navigation {
+  padding: 1rem;
+  background-color: $navigation-background;
+
+  &__list {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__item + &__item {
+    margin-left: 0.4rem;
+  }
+
+  &__button {
+    text-transform: uppercase;
+  }
+}

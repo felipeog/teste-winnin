@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navigation } from 'components'
+import './index.scss'
 
 const Header = () => (
   <header className="header">
