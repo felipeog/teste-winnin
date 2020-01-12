@@ -37,7 +37,7 @@ const PostList = ({ subreddit }) => {
         setAfter(loadedPosts[loadedPosts.length - 1].name)
       }
     } catch (e) {
-      console.error('PostList@loadPosts hot >>>>>>', e)
+      console.error('PostList@loadPosts >>>>>>', e)
       setError(true)
     } finally {
       setLoading(false)
