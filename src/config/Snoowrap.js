@@ -1,10 +1,5 @@
 import Snoowrap from 'snoowrap'
 
-console.log(process.env.USER_AGENT)
-console.log(process.env.CLIENT_ID)
-console.log(process.env.REFRESH_TOKEN)
-console.log(process.env.ACCESS_TOKEN)
-
 const r = new Snoowrap({
   userAgent: 'winnin-desafio-frontend',
   clientId: 'WikUjYybBABEhQ',
