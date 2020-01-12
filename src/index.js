@@ -3,6 +3,4 @@ import ReactDOM from 'react-dom'
 import './assets/css/index.scss'
 import App from './components/App/App'
 
-console.log(process.env)
-
 ReactDOM.render(<App />, document.getElementById('root'))
