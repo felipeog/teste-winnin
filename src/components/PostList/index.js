@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './index.scss'
 import { PostItem } from 'components'
-import r from 'config/Snoowrap'
+import Axios from 'axios'
 
 const PostList = ({ subreddit }) => {
   const [after, setAfter] = useState(null)
@@ -9,7 +9,9 @@ const PostList = ({ subreddit }) => {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([])
-  const options = { limit: 10 }
+
+  const api = 'https://www.reddit.com/r/reactjs'
+  const limit = 10
 
   useEffect(() => {
     loadPosts()
@@ -17,86 +19,28 @@ const PostList = ({ subreddit }) => {
 
   const loadPosts = async () => {
     setLoading(true)
-    const board = await r.getSubreddit('reactjs')
 
-    switch (subreddit) {
-      case 'hot':
-        try {
-          let loadedPosts = await board.getHot({
-            ...options,
-            after,
-          })
+    try {
+      const query = `${api}/${subreddit}/.json?limit=${limit}${
+        after ? '&after=' + after : ''
+      }`
+      const { data } = await Axios.get(query)
+      const { children } = data.data
+      const loadedPosts = children.map((child) => child.data).slice(0, 10)
 
-          let stickied = 0
-          loadedPosts.forEach((newPost) => newPost.stickied && stickied++)
+      setPosts([...posts, ...loadedPosts])
 
-          if (stickied)
-            loadedPosts = loadedPosts.slice(0, loadedPosts.length - stickied)
-
-          setPosts([...posts, ...loadedPosts])
-
-          if (!loadedPosts.length || loadedPosts.length < options.limit) {
-            setAfter(null)
-            setEnd(true)
-          } else {
-            setAfter(loadedPosts[loadedPosts.length - 1].name)
-          }
-        } catch (e) {
-          console.error('PostList@loadPosts hot >>>>>>', e)
-          setError(true)
-        } finally {
-          setLoading(false)
-        }
-        break
-
-      case 'new':
-        try {
-          const loadedPosts = await board.getNew({
-            ...options,
-            after,
-          })
-
-          setPosts([...posts, ...loadedPosts])
-
-          if (!loadedPosts.length || loadedPosts.length < options.limit) {
-            setAfter(null)
-            setEnd(true)
-          } else {
-            setAfter(loadedPosts[loadedPosts.length - 1].name)
-          }
-        } catch (e) {
-          console.error('PostList@loadPosts new >>>>>>', e)
-          setError(true)
-        } finally {
-          setLoading(false)
-        }
-        break
-
-      case 'rising':
-        try {
-          const loadedPosts = await board.getRising({
-            ...options,
-            after,
-          })
-
-          setPosts([...posts, ...loadedPosts])
-
-          if (!loadedPosts.length || loadedPosts.length < options.limit) {
-            setAfter(null)
-            setEnd(true)
-          } else {
-            setAfter(loadedPosts[loadedPosts.length - 1].name)
-          }
-        } catch (e) {
-          console.error('PostList@loadPosts rising >>>>>>', e)
-          setError(true)
-        } finally {
-          setLoading(false)
-        }
-        break
-
-      default:
-        break
+      if (!loadedPosts.length || loadedPosts.length < limit) {
+        setAfter(null)
+        setEnd(true)
+      } else {
+        setAfter(loadedPosts[loadedPosts.length - 1].name)
+      }
+    } catch (e) {
+      console.error('PostList@loadPosts hot >>>>>>', e)
+      setError(true)
+    } finally {
+      setLoading(false)
     }
   }
 
