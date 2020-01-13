@@ -21,6 +21,10 @@ class App extends Component {
           <Route path="/hot" component={HotFeed} />
           <Route path="/new" component={NewFeed} />
           <Route path="/rising" component={RisingFeed} />
+
+          <Route>
+            <Redirect to="/hot" />
+          </Route>
         </Switch>
       </Router>
     )
