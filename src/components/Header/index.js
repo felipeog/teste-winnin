@@ -1,11 +1,35 @@
-import React from 'react'
 import { Navigation } from 'components'
-import './index.scss'
+
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
 
 const Header = () => (
-  <header className="header">
-    <h1 className="header__title">
-      React<span className="header__title--accent">JS</span>
+  <header
+    css={(theme) => css`
+      background-color: ${theme.header.background};
+      position: fixed;
+      top: 0;
+      width: 100%;
+    `}
+  >
+    <h1
+      css={(theme) => css`
+        font-size: 1.6rem;
+        color: ${theme.header.text};
+        font-weight: bold;
+        text-align: center;
+        text-transform: uppercase;
+        padding: 1.6rem;
+      `}
+    >
+      React
+      <span
+        css={(theme) => css`
+          color: ${theme.color.accent};
+        `}
+      >
+        JS
+      </span>
     </h1>
 
     <Navigation />
