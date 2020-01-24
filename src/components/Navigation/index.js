@@ -1,41 +1,34 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import './index.scss'
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
+import { Nav, NavList, NavItem, NavLink } from './styles'
+
+const navLinks = [
+  {
+    label: 'Hot',
+    to: 'hot',
+  },
+  {
+    label: 'New',
+    to: 'new',
+  },
+  {
+    label: 'Rising',
+    to: 'rising',
+  },
+]
 
 const Navigation = () => (
-  <nav className="navigation">
-    <ul className="navigation__list">
-      <li className="navigation__item">
-        <NavLink
-          className="button navigation__button"
-          activeClassName="button--active"
-          to="/hot"
-        >
-          Hot
-        </NavLink>
-      </li>
-
-      <li className="navigation__item">
-        <NavLink
-          className="button navigation__button"
-          activeClassName="button--active"
-          to="/new"
-        >
-          New
-        </NavLink>
-      </li>
-
-      <li className="navigation__item">
-        <NavLink
-          className="button navigation__button"
-          activeClassName="button--active"
-          to="/rising"
-        >
-          Rising
-        </NavLink>
-      </li>
-    </ul>
-  </nav>
+  <Nav>
+    <NavList>
+      {navLinks.map((navLink) => (
+        <NavItem>
+          <NavLink activeClassName="isActive" to={navLink.to}>
+            {navLink.label}
+          </NavLink>
+        </NavItem>
+      ))}
+    </NavList>
+  </Nav>
 )
 
 export default Navigation
