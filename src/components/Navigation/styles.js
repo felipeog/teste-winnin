@@ -18,18 +18,7 @@ export const NavItem = styled('li')`
 `
 
 export const NavLink = styled(Link)`
-  font-size: 1rem;
-  padding: 0.8rem;
-  display: inline-block;
-  background-color: ${(props) => props.theme.button.background};
-  border: none;
-  border-radius: 0.4rem;
-  width: 10rem;
-  color: ${(props) => props.theme.button.text};
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 200ms;
+  ${(props) => props.theme.button.default};
   text-transform: uppercase;
 
   &.isActive,

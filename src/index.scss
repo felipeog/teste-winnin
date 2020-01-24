@@ -159,12 +159,8 @@ body {
   cursor: pointer;
   transition: background-color 200ms;
 
-  &--active {
-    background-color: $accent-color;
-  }
-
-  &--disabled {
-    cursor: default;
+  &[disabled] {
+    cursor: not-allowed;
     background-color: $button-background-disabled;
     color: $button-text-disabled;
   }
