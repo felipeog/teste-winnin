@@ -62,10 +62,9 @@ const PostList = ({ subreddit }) => {
 
           <button
             type="button"
-            disabled={end || loading ? 'disabled' : ''}
-            className={`button load-more ${
-              end || loading ? 'button--disabled' : ''
-            }`}
+            disabled={end || loading}
+            className={`button load-more ${(end || loading) &&
+              'button--disabled'}`}
             onClick={loadPosts}
           >
             + Ver mais

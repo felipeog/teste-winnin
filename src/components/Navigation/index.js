@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
-import { Nav, NavList, NavItem, NavLink } from './styles'
+import { Container, NavList, NavItem, NavLink } from './styles'
 
 const navLinks = [
   {
@@ -18,7 +18,7 @@ const navLinks = [
 ]
 
 const Navigation = () => (
-  <Nav>
+  <Container>
     <NavList>
       {navLinks.map((navLink) => (
         <NavItem>
@@ -28,7 +28,7 @@ const Navigation = () => (
         </NavItem>
       ))}
     </NavList>
-  </Nav>
+  </Container>
 )
 
 export default Navigation

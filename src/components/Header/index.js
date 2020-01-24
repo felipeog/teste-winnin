@@ -1,18 +1,18 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 import { Navigation } from 'components'
-import { Header, Title, TitleAccent } from './styles'
+import { Container, Title, TitleAccent } from './styles'
 
-const HeaderNavigation = () => {
+const Header = () => {
   return (
-    <Header>
+    <Container>
       <Title>
         React<TitleAccent>JS</TitleAccent>
       </Title>
 
       <Navigation />
-    </Header>
+    </Container>
   )
 }
 
-export default HeaderNavigation
+export default Header

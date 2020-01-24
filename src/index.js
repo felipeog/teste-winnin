@@ -29,7 +29,7 @@ const defaultTheme = {
     hover: '#eee',
     time: '#444',
     title: '#222',
-    url: '#000',
+    permalink: '#000',
     user: '#ff5500',
     wrapper: {
       background: '#000',

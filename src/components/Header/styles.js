@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const Header = styled('header')`
+export const Container = styled('header')`
   background-color: ${(props) => props.theme.header.background};
   position: fixed;
   top: 0;

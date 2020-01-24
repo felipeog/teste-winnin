@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { NavLink as Link } from 'react-router-dom'
 
-export const Nav = styled('nav')`
+export const Container = styled('nav')`
   padding: 1rem;
   background-color: ${(props) => props.theme.navigation.background};
 `
