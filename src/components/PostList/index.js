@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import './index.scss'
 import { PostItem } from 'components'
 import Axios from 'axios'
@@ -13,11 +13,7 @@ const PostList = ({ subreddit }) => {
   const api = 'https://www.reddit.com/r/reactjs'
   const limit = 10
 
-  useEffect(() => {
-    loadPosts()
-  }, [])
-
-  const loadPosts = async () => {
+  const loadPosts = useCallback(async (after, subreddit) => {
     setLoading(true)
 
     try {
@@ -28,7 +24,7 @@ const PostList = ({ subreddit }) => {
       const { children } = data.data
       const loadedPosts = children.map((child) => child.data).slice(0, 10)
 
-      setPosts([...posts, ...loadedPosts])
+      setPosts((posts) => [...posts, ...loadedPosts])
 
       if (!loadedPosts.length || loadedPosts.length < limit) {
         setAfter(null)
@@ -42,7 +38,11 @@ const PostList = ({ subreddit }) => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
+
+  useEffect(() => {
+    loadPosts(null, subreddit)
+  }, [loadPosts, subreddit])
 
   return (
     <React.Fragment>
@@ -66,7 +66,7 @@ const PostList = ({ subreddit }) => {
             className={`button load-more ${
               end || loading ? 'button--disabled' : ''
             }`}
-            onClick={loadPosts}
+            onClick={() => loadPosts(after, subreddit)}
           >
             + Ver mais
           </button>
