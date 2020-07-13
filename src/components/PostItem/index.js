@@ -6,7 +6,7 @@ import './index.scss'
 const formatData = (post) => {
   const thumb = post.thumbnail.match('http') ? post.thumbnail : false
   const title = post.title
-  const user = post.author.name
+  const user = post.author
   const url = 'https://www.reddit.com' + post.permalink
   const time = moment.unix(post.created_utc).fromNow()
 
