@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import './index.scss'
 import { PostItem } from 'components'
-import Axios from 'axios'
 
 const PostList = ({ subreddit }) => {
   const [after, setAfter] = useState(null)
@@ -9,40 +8,61 @@ const PostList = ({ subreddit }) => {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([])
+  const [signal, setSignal] = useState(null)
 
-  const api = 'https://www.reddit.com/r/reactjs'
   const limit = 10
 
-  const loadPosts = useCallback(async (after, subreddit) => {
-    setLoading(true)
+  const getQuery = useCallback(
+    (after) => {
+      const api = 'https://www.reddit.com/r/reactjs'
 
-    try {
-      const query = `${api}/${subreddit}/.json?limit=${limit}${
-        after ? '&after=' + after : ''
-      }`
-      const { data } = await Axios.get(query)
-      const { children } = data.data
-      const loadedPosts = children.map((child) => child.data).slice(0, 10)
+      return `
+      ${api}/${subreddit}/.json?limit=${limit}${after && '&after=' + after}
+    `
+    },
+    [subreddit]
+  )
 
-      setPosts((posts) => [...posts, ...loadedPosts])
+  const loadPosts = useCallback(
+    async (after, signal) => {
+      setLoading(true)
 
-      if (!loadedPosts.length || loadedPosts.length < limit) {
-        setAfter(null)
-        setEnd(true)
-      } else {
-        setAfter(loadedPosts[loadedPosts.length - 1].name)
+      try {
+        const query = getQuery(after)
+        const response = await fetch(query, { signal })
+        const data = await response.json()
+        const { children } = data.data
+        const loadedPosts = children.map((child) => child.data).slice(0, 10)
+
+        setPosts((posts) => [...posts, ...loadedPosts])
+
+        if (!loadedPosts.length || loadedPosts.length < limit) {
+          setAfter(null)
+          setEnd(true)
+        } else {
+          setAfter(loadedPosts[loadedPosts.length - 1].name)
+        }
+      } catch (e) {
+        if (!e.name === 'AbortError') {
+          console.error('PostList@loadPosts >>>>>>', e)
+          setError(true)
+        }
+      } finally {
+        setLoading(false)
       }
-    } catch (e) {
-      console.error('PostList@loadPosts >>>>>>', e)
-      setError(true)
-    } finally {
-      setLoading(false)
-    }
-  }, [])
+    },
+    [getQuery]
+  )
 
   useEffect(() => {
-    loadPosts(null, subreddit)
-  }, [loadPosts, subreddit])
+    const controller = new AbortController()
+    const { signal } = controller
+    setSignal(signal)
+
+    loadPosts(null, signal)
+
+    return () => controller.abort()
+  }, [loadPosts])
 
   return (
     <React.Fragment>
@@ -66,7 +86,7 @@ const PostList = ({ subreddit }) => {
             className={`button load-more ${
               end || loading ? 'button--disabled' : ''
             }`}
-            onClick={() => loadPosts(after, subreddit)}
+            onClick={() => loadPosts(after, signal)}
           >
             + Ver mais
           </button>
