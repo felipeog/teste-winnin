@@ -42,13 +42,14 @@ const PostList = ({ subreddit }) => {
         } else {
           setAfter(loadedPosts[loadedPosts.length - 1].name)
         }
+
+        setLoading(false)
       } catch (e) {
         if (!e.name === 'AbortError') {
           console.error('PostList@loadPosts >>>>>>', e)
           setError(true)
+          setLoading(false)
         }
-      } finally {
-        setLoading(false)
       }
     },
     [getQuery]
