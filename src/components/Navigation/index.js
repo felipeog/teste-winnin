@@ -23,8 +23,8 @@ const Navigation = () => (
       {tabs.map(({ label, value }) => (
         <li key={value} className="navigation__item">
           <NavLink
-            className="button navigation__button"
-            activeClassName="button--active"
+            className="navigation__button"
+            activeClassName="navigation__button--active"
             to={`/${value}`}
           >
             {label}

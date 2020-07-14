@@ -1,4 +1,4 @@
-@import '../../vars';
+@import '../../base';
 
 .navigation {
   padding: 1rem;
@@ -14,6 +14,13 @@
   }
 
   &__button {
+    @include button;
     text-transform: uppercase;
+  }
+}
+
+@media screen and (max-width: 529px) {
+  .navigation__button {
+    width: 5rem;
   }
 }

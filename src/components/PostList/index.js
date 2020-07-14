@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import './index.scss'
-import { PostItem } from 'components'
+import { PostItem, Message } from 'components'
 
 const PostList = ({ subreddit }) => {
   const [after, setAfter] = useState(null)
@@ -65,19 +65,8 @@ const PostList = ({ subreddit }) => {
     return () => controller.abort()
   }, [loadPosts])
 
-  if (loading && !posts.length)
-    return (
-      <section className="message-wrapper">
-        <p className="message">Carregando posts...</p>
-      </section>
-    )
-
-  if (error)
-    return (
-      <section className="message-wrapper">
-        <p className="message">Erro ao carregar posts</p>
-      </section>
-    )
+  if (loading && !posts.length) return <Message message="Carregando posts..." />
+  if (error) return <Message message="Erro ao carregar posts :(" />
 
   return (
     <section className="post-list">
@@ -85,16 +74,18 @@ const PostList = ({ subreddit }) => {
         <PostItem key={post.id} post={post} />
       ))}
 
-      {end && <p className="post-list__end">Fim do conteúdo</p>}
+      {end && <Message message="Fim do conteúdo" />}
 
-      <button
-        type="button"
-        disabled={end || loading}
-        className="button load-more"
-        onClick={() => loadPosts(after, signal)}
-      >
-        + Ver mais
-      </button>
+      {!end && (
+        <button
+          type="button"
+          disabled={end || loading}
+          className="post-list__load-more"
+          onClick={() => loadPosts(after, signal)}
+        >
+          + Ver mais
+        </button>
+      )}
     </section>
   )
 }

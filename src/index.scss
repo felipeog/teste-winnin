@@ -1,4 +1,4 @@
-@import './vars';
+@import './base';
 
 html,
 body,
@@ -144,47 +144,4 @@ html {
 
 body {
   margin-top: 160px;
-}
-
-.button {
-  font-size: 1rem;
-  padding: 0.8rem;
-  display: inline-block;
-  background-color: $button-background;
-  border: none;
-  border-radius: 0.4rem;
-  width: 10rem;
-  color: $button-text;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 200ms;
-
-  &--active {
-    background-color: $accent-color;
-  }
-
-  &[disabled] {
-    cursor: default;
-    background-color: $button-background-disabled;
-    color: $button-text-disabled;
-  }
-}
-
-.load-more {
-  margin-top: 1rem;
-  font-weight: bold;
-  width: 100%;
-}
-
-.message-wrapper {
-  max-width: calc(880px + 2 * 1rem);
-  margin: 0 auto;
-  padding: 0 1rem 1rem;
-}
-
-@media screen and (max-width: 529px) {
-  .navigation__button {
-    width: 5rem;
-  }
 }

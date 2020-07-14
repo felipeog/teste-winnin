@@ -1,11 +1,14 @@
-@import '../../vars';
+@import '../../base';
 
 .post-list {
   max-width: calc(880px + 2 * 1rem);
   margin: 0 auto;
   padding: 0 1rem 1rem;
 
-  &__end {
+  &__load-more {
+    @include button;
     margin-top: 1rem;
+    font-weight: bold;
+    width: 100%;
   }
 }

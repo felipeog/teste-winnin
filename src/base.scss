@@ -1,0 +1,47 @@
+$white: #fff;
+$black: #000;
+
+$accent-color: #ff5500;
+
+$button-background-disabled: #888;
+$button-background: #666;
+$button-text-disabled: #ddd;
+$button-text: $white;
+
+$header-background: #333;
+$header-text: $white;
+
+$navigation-background: $white;
+
+$post-item-hover-color: #eee;
+$post-item-time-text: #444;
+$post-item-title-text: #222;
+$post-item-url-text: $black;
+$post-item-user-text: $accent-color;
+$post-item-wrapper-background: $black;
+$post-item-wrapper-border: 1px solid #666;
+
+@mixin button {
+  font-size: 1rem;
+  padding: 0.8rem;
+  display: inline-block;
+  background-color: $button-background;
+  border: none;
+  border-radius: 0.4rem;
+  width: 10rem;
+  color: $button-text;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 200ms;
+
+  &--active {
+    background-color: $accent-color;
+  }
+
+  &[disabled] {
+    cursor: default;
+    background-color: $button-background-disabled;
+    color: $button-text-disabled;
+  }
+}
