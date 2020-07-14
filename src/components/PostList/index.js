@@ -32,7 +32,7 @@ const PostList = ({ subreddit }) => {
         const response = await fetch(query, { signal })
         const data = await response.json()
         const { children } = data.data
-        const loadedPosts = children.map((child) => child.data).slice(0, 10)
+        const loadedPosts = children.map((child) => child.data)
 
         setPosts((posts) => [...posts, ...loadedPosts])
 
@@ -80,24 +80,22 @@ const PostList = ({ subreddit }) => {
     )
 
   return (
-    <>
-      <section className="post-list">
-        {posts.map((post) => (
-          <PostItem key={post.id} post={post} />
-        ))}
+    <section className="post-list">
+      {posts.map((post) => (
+        <PostItem key={post.id} post={post} />
+      ))}
 
-        {end && <p className="post-list__end">Fim do conteúdo</p>}
+      {end && <p className="post-list__end">Fim do conteúdo</p>}
 
-        <button
-          type="button"
-          disabled={end || loading}
-          className="button load-more"
-          onClick={() => loadPosts(after, signal)}
-        >
-          + Ver mais
-        </button>
-      </section>
-    </>
+      <button
+        type="button"
+        disabled={end || loading}
+        className="button load-more"
+        onClick={() => loadPosts(after, signal)}
+      >
+        + Ver mais
+      </button>
+    </section>
   )
 }
 
