@@ -2,12 +2,11 @@ import React from 'react'
 import moment from 'moment'
 import 'moment/locale/pt-br'
 import './index.scss'
+import Pin from '../../assets/img/pin.svg'
 
 const PostItem = ({ post }) => {
+  const { title, author, stickied, url } = post
   const thumb = post.thumbnail.match('http') ? post.thumbnail : null
-  const title = post.title
-  const user = post.author
-  const url = `https://www.reddit.com${post.permalink}`
   const time = moment.unix(post.created_utc).fromNow()
 
   return (
@@ -24,10 +23,12 @@ const PostItem = ({ post }) => {
           <h1 className="post-item__title">{title}</h1>
           <p className="post-item__meta">
             <span className="post-item__time">Enviado {time}</span> por{' '}
-            <span className="post-item__user">{user}</span>
+            <span className="post-item__author">{author}</span>
           </p>
           <p className="post-item__url">{url}</p>
         </div>
+
+        {stickied && <img className="post-item__pin" src={Pin} alt="" />}
       </article>
     </a>
   )

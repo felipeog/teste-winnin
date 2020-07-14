@@ -1,4 +1,4 @@
-@import '../../base';
+@import '../../assets/css/base';
 
 .post-item-wrapper {
   color: $post-item-wrapper-background;
@@ -14,6 +14,7 @@
 .post-item {
   display: flex;
   padding: 0.8rem 0;
+  position: relative;
 
   &:hover {
     background-color: $post-item-hover-color;
@@ -41,8 +42,8 @@
     color: $post-item-time-text;
   }
 
-  &__user {
-    color: $post-item-user-text;
+  &__author {
+    color: $post-item-author-text;
   }
 
   &__url {
@@ -52,5 +53,12 @@
     text-decoration: underline;
     text-underline-position: under;
     line-height: 1.4em;
+  }
+
+  &__pin {
+    position: absolute;
+    width: 1rem;
+    top: 0.8rem;
+    right: 0;
   }
 }

@@ -1,10 +1,11 @@
-@import '../../base';
+@import '../../assets/css/base';
 
 .header {
   background-color: $header-background;
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 100;
 
   &__title {
     font-size: 1.6rem;
