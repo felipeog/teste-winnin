@@ -32,7 +32,7 @@ const PostList = ({ subreddit }) => {
         const response = await fetch(query, { signal })
         const data = await response.json()
         const { children } = data.data
-        const loadedPosts = children.map((child) => child.data)
+        const loadedPosts = children.map((child) => child.data).slice(0, 10) // slice the first ten items in case there are pinned posts
 
         setPosts((posts) => [...posts, ...loadedPosts])
 
