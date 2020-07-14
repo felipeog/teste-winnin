@@ -164,7 +164,7 @@ body {
     background-color: $accent-color;
   }
 
-  &--disabled {
+  &[disabled] {
     cursor: default;
     background-color: $button-background-disabled;
     color: $button-text-disabled;
@@ -177,7 +177,7 @@ body {
   width: 100%;
 }
 
-.error {
+.message-wrapper {
   max-width: calc(880px + 2 * 1rem);
   margin: 0 auto;
   padding: 0 1rem 1rem;

@@ -45,7 +45,7 @@ const PostList = ({ subreddit }) => {
 
         setLoading(false)
       } catch (e) {
-        if (!e.name === 'AbortError') {
+        if (e.name !== 'AbortError') {
           console.error('PostList@loadPosts >>>>>>', e)
           setError(true)
           setLoading(false)
@@ -65,35 +65,39 @@ const PostList = ({ subreddit }) => {
     return () => controller.abort()
   }, [loadPosts])
 
+  if (loading && !posts.length)
+    return (
+      <section className="message-wrapper">
+        <p className="message">Carregando posts...</p>
+      </section>
+    )
+
+  if (error)
+    return (
+      <section className="message-wrapper">
+        <p className="message">Erro ao carregar posts</p>
+      </section>
+    )
+
   return (
-    <React.Fragment>
-      {error ? (
-        <section className="error">
-          <p className="error__message">Erro ao carregar posts</p>
-        </section>
-      ) : (
-        <section className="post-list">
-          {posts.length ? (
-            posts.map((post) => <PostItem key={post.id} post={post} />)
-          ) : (
-            <p className="post-list__loading">Carregando posts...</p>
-          )}
+    <>
+      <section className="post-list">
+        {posts.map((post) => (
+          <PostItem key={post.id} post={post} />
+        ))}
 
-          {end ? <p className="post-list__end">Fim do conteúdo</p> : ''}
+        {end && <p className="post-list__end">Fim do conteúdo</p>}
 
-          <button
-            type="button"
-            disabled={end || loading ? 'disabled' : ''}
-            className={`button load-more ${
-              end || loading ? 'button--disabled' : ''
-            }`}
-            onClick={() => loadPosts(after, signal)}
-          >
-            + Ver mais
-          </button>
-        </section>
-      )}
-    </React.Fragment>
+        <button
+          type="button"
+          disabled={end || loading}
+          className="button load-more"
+          onClick={() => loadPosts(after, signal)}
+        >
+          + Ver mais
+        </button>
+      </section>
+    </>
   )
 }
 
