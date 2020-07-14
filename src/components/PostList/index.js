@@ -17,8 +17,8 @@ const PostList = ({ subreddit }) => {
       const api = 'https://www.reddit.com/r/reactjs'
 
       return `
-      ${api}/${subreddit}/.json?limit=${limit}${after && '&after=' + after}
-    `
+      ${api}/${subreddit}/.json?limit=${limit}${after ? '&after=' + after : ''}
+      `
     },
     [subreddit]
   )
