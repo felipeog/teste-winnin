@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import moment from 'moment'
-import 'moment/locale/pt-br'
 import './index.scss'
 import Pin from '../../assets/img/pin.svg'
 import ArrowUp from '../../assets/img/arrowUp.svg'
+import { decodeEntities, elapsedTime } from 'utils'
 
 const PostItem = ({ post }) => {
-  const { title, author, stickied } = post
+  const { author, stickied } = post
+  const title = decodeEntities(post.title)
   const upvoteRatio = post.upvote_ratio * 100
-  const url = `https://www.reddit.com/${post.permalink}`
+  const url = `https://www.reddit.com${post.permalink}`
   const thumb = post.thumbnail.match('http') ? post.thumbnail : null
-  const time = moment.unix(post.created_utc).fromNow()
+  const time = elapsedTime(post.created_utc)
 
   return (
     <a
@@ -26,7 +26,7 @@ const PostItem = ({ post }) => {
         <div className="content">
           <h1 className="content__title">{title}</h1>
           <p className="content__meta">
-            <span className="content__time">Enviado {time}</span> por{' '}
+            <span className="content__time">Enviado há {time}</span> por{' '}
             <span className="content__author">{author}</span>
           </p>
           <p className="content__url">{url}</p>
