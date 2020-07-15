@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 import './index.scss'
 import Pin from '../../assets/img/pin.svg'
 import ArrowUp from '../../assets/img/arrowUp.svg'
+import Comment from '../../assets/img/comment.svg'
 import { decodeEntities, elapsedTime } from 'utils'
 
 const PostItem = ({ post }) => {
   const { author, stickied } = post
+  const comments = post.num_comments.toLocaleString()
   const title = decodeEntities(post.title)
   const upvoteRatio = post.upvote_ratio * 100
   const url = `https://www.reddit.com${post.permalink}`
@@ -32,9 +34,15 @@ const PostItem = ({ post }) => {
           <p className="content__url">{url}</p>
         </div>
 
-        <div className="upvote-ratio">
-          <img className="upvote-ratio__icon" src={ArrowUp} alt="" />
-          <p className="upvote-ratio__count">{upvoteRatio}%</p>
+        <div className="metrics">
+          <div className="metrics__metric">
+            <img className="metrics__icon" src={Comment} alt="" />
+            <p className="metrics__count">{comments}</p>
+          </div>
+          <div className="metrics__metric">
+            <img className="metrics__icon" src={ArrowUp} alt="" />
+            <p className="metrics__count">{upvoteRatio}%</p>
+          </div>
         </div>
 
         {stickied && <img className="post-item__pin" src={Pin} alt="" />}

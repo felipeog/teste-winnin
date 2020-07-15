@@ -9,8 +9,10 @@
     justify-content: center;
   }
 
-  &__item + &__item {
-    margin-left: 0.4rem;
+  &__item {
+    & + & {
+      margin-left: 0.4rem;
+    }
   }
 
   &__button {
