@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './index.scss'
 
 const Message = ({ message }) => (
@@ -6,5 +7,9 @@ const Message = ({ message }) => (
     <p>{message}</p>
   </section>
 )
+
+Message.propTypes = {
+  message: PropTypes.string.isRequired,
+}
 
 export default Message

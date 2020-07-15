@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 import 'moment/locale/pt-br'
 import './index.scss'
@@ -40,6 +41,10 @@ const PostItem = ({ post }) => {
       </article>
     </a>
   )
+}
+
+PostItem.propTypes = {
+  post: PropTypes.object.isRequired,
 }
 
 export default PostItem

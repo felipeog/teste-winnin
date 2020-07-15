@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
+import PropTypes from 'prop-types'
 import './index.scss'
 import { PostItem, Message } from 'components'
 
@@ -88,6 +89,10 @@ const PostList = ({ subreddit }) => {
       )}
     </section>
   )
+}
+
+PostList.propTypes = {
+  subreddit: PropTypes.string.isRequired,
 }
 
 export default PostList
