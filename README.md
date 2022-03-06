@@ -1,6 +1,6 @@
-# Winnin test
+# Winnin's frontend challenge
 
-## Live Demo
+## Live demo
 
 https://teste-winnin.felipeog.com.br/hot
 
