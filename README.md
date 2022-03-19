@@ -2,7 +2,7 @@
 
 ## Live demo
 
-https://teste-winnin.felipeog.com.br/hot
+https://teste-winnin.netlify.app
 
 ## How to run
 
